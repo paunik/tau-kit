@@ -13,11 +13,13 @@ internal struct TemplateDataValue: TemplateDataRepresentable {
     var isVariable: Bool { container.isVariable }
     var templateData: TemplateData { container.templateData }
         
-    var cached: Bool {
-        if case .variable(_, .none) = container { return false }
-        if case .literal(let d) = container, d.isLazy { return false }
-        return true
-    }
+//    var cached: Bool {
+//        if case .variable(_, .none) = container { return false }
+//        if case .literal(let d) = container, d.isLazy { return false }
+//        return true
+//    }
+    
+    var cached: Bool = false
     
     /// Coalesce to a literal
     mutating func flatten() {
