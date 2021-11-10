@@ -14,10 +14,16 @@ let package = Package(
         .package(url: "https://github.com/apple/swift-nio.git", from: "2.28.0"),
     ],
     targets: [
-        .target(name: "TauKit", dependencies: [
-            .product(name: "NIO", package: "swift-nio"),
-            .product(name: "NIOFoundationCompat", package: "swift-nio"),
-        ]),
+        .target(
+            name: "TauKit",
+            dependencies: [
+                .product(name: "NIO", package: "swift-nio"),
+                .product(name: "NIOFoundationCompat", package: "swift-nio"),
+            ],
+            swiftSettings: [
+                .unsafeFlags(["-Xfrontend", "-sil-verify-none"], .when(platforms: [.linux])),
+            ]
+        ),
         .target(name: "XCTTauKit", dependencies: [
             .target(name: "TauKit"),
         ]),
